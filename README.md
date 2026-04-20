@@ -1,4 +1,12 @@
-# 1. nginx sites-available specific file
+# 1. In Cloudflare
+Get your custom action token for your account
+After setup all of these below.
+Go to the domain -> your domain -> Security -> Rules.
+Cloudflare allow up to 10,000 rules for free.
+
+# 2. nginx sites-available specific file
+Note that this is not exhaustive, and please modify/add accordingly
+
 ```bash
 server {
     server_name yourwebsite.com
@@ -87,10 +95,10 @@ server {
 }
 ```
 
-# 2. nginx.conf file
-```
-cat /etc/nginx/nginx.conf
+# 3. nginx.conf file
+This is not an exhaustive config, please modify/add accordingly.
 
+```
 cat /etc/nginx/nginx.conf
 
 http {
@@ -142,7 +150,9 @@ server_tokens off;
 }
 ```
 
-# 3. fail2ban filter.d setup example
+# 4. fail2ban filter.d setup example
+This is not an exhaustive list, please modify/add accordingly.
+
 ```
 cat /etc/fail2ban/filter.d/admin-login.conf
 
@@ -152,7 +162,9 @@ failregex = ^<HOST> .* "POST /admin-login.php
 			//add more to fit your web app
 ```
 
-# 4. setup fail2ban jail file
+# 5. setup fail2ban jail file
+This is not an exhaustive list, please modify/add accordingly.
+
 ```
 cat /etc/fail2ban/jail.local
 [DEFAULT]
@@ -171,7 +183,7 @@ maxretry = # how many tries before you want to trigger the action
 bantime = # how long you want to ban or action applied (in seconds)
 findtime = # set the "within" time
 backend = auto # keep this auto is fine most of the time
-action = cloudflare-token[cftoken="xxxxxxxxxxxxxxxxx", cfzone="xxxxxxxxxxxxxxxx", cfmode="xxxxxxxxx"] # cfmode here is where what action you want to set, e.g. challenge / ban IP
+action = cloudflare-token[cftoken="xxxxxxxxxxxxxxxxx", cfzone="xxxxxxxxxxxxxxxx", cfmode="xxxxxxxxx"] # cfmode here is where what action you want to set, e.g. challenge / ban IP -> Please go to Cloudflare for more list
 
 # SSH brute force
 [sshd]
