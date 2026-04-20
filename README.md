@@ -9,6 +9,7 @@ server {
     client_max_body_size 64M;
     
     # Only allow Cloudflare IPs
+    # Note that you should setup your Security Group, this is only failover setup
     if ($http_cf_connecting_ip = "") {
         return 403;
     }
